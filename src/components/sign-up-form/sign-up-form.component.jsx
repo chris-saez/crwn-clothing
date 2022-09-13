@@ -8,7 +8,7 @@ import { createAuthUserFromEmailAndPassword,
 
 import { updateProfile } from "firebase/auth";
 
-import './sign-up.styles.scss';
+import './sign-up-form.styles.scss';
 
 import Button from '../button/button.component';
 
@@ -19,7 +19,7 @@ const defaultFormField = {
     confirmPassword: '',
 };
 
-const SignUp = () => {
+const SignUpForm = () => {
     const [formFields, setFormFields] = useState(defaultFormField);
     const { displayName, email, password, confirmPassword } = formFields;
 
@@ -30,27 +30,27 @@ const SignUp = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-            if(!(password === confirmPassword)) {
-                alert('Passwords do not match!');
-                return;
-            }
+        if(!(password === confirmPassword)) {
+            alert('Passwords do not match!');
+            return;
+        }
 
-            try {
-            const { user } = await createAuthUserFromEmailAndPassword(email, password);
-            updateProfile(user, {
-                displayName: displayName
-            });
-   
-            const userDocRef = await createUserDocumentFromAuth(user);
-            resetFormField();
-            } catch(error) {
-                if(error.code == 'auth/email-already-in-use'){
-                    alert('Email has already been taken')
-                } else {
-                    alert('Error in account creation');
-                    console.log(error);
-                }
+        try {
+        const { user } = await createAuthUserFromEmailAndPassword(email, password);
+        updateProfile(user, {
+            displayName: displayName
+        });
+
+        const userDocRef = await createUserDocumentFromAuth(user);
+        resetFormField();
+        } catch(error) {
+            if(error.code == 'auth/email-already-in-use'){
+                alert('Email has already been taken')
+            } else {
+                alert('Error in account creation');
+                console.log(error);
             }
+        }
     }
 
     const handleChange = (event) => {
@@ -114,4 +114,4 @@ const SignUp = () => {
     )
 }
 
-export default SignUp;
+export default SignUpForm;
