@@ -4,7 +4,7 @@ const CategoryItem = ({ category }) => {
     const { imageUrl, title } = category;
     return (
         <div className="category-container">
-          <div 
+          <div  
             className="background-image" 
             style={{
             backgroundImage: `url(${imageUrl})`
@@ -18,4 +18,4 @@ const CategoryItem = ({ category }) => {
     )
 }
 
-export default CategoryItem
+export default CategoryItem;
