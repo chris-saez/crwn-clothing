@@ -8,6 +8,10 @@ import { createAuthUserFromEmailAndPassword,
 
 import { updateProfile } from "firebase/auth";
 
+import './sign-up.styles.scss';
+
+import Button from '../button/button.component';
+
 const defaultFormField = {
     displayName: '',
     email: '',
@@ -56,56 +60,57 @@ const SignUp = () => {
     }
 
     return (
-    <div>
-        <h1>Sign up with email and password</h1>
-        <form onSubmit={handleSubmit}>
-            <FormInput  
-                    label='Display Name'
-                    inputOptions={{
-                        required: true,
-                        type:'text',
-                        onChange:handleChange,
-                        name:'displayName', 
-                        value:displayName
-                    }}
-            />
-            
-            <FormInput  
-                    label='Email'
-                    inputOptions={{
-                        required: true,
-                        type:'email',
-                        onChange:handleChange,
-                        name:'email', 
-                        value:email
-                    }}
-            />
-            
-            <FormInput  
-                    label='Password'
-                    inputOptions={{
-                        required: true,
-                        type:'password',
-                        onChange:handleChange,
-                        name:'password', 
-                        value:password
-                    }}
-            />
+        <div className='sign-up-container'>
+            <h2>Don't have an account?</h2>
+            <span>Sign up with email and password</span>
+            <form onSubmit={handleSubmit}>
+                <FormInput  
+                        label='Display Name'
+                        inputOptions={{
+                            required: true,
+                            type:'text',
+                            onChange:handleChange,
+                            name:'displayName', 
+                            value:displayName
+                        }}
+                />
+                  
+                <FormInput  
+                        label='Email'
+                        inputOptions={{
+                            required: true,
+                            type:'email',
+                            onChange:handleChange,
+                            name:'email', 
+                            value:email
+                        }}
+                />
+                
+                <FormInput  
+                        label='Password'
+                        inputOptions={{
+                            required: true,
+                            type:'password',
+                            onChange:handleChange,
+                            name:'password', 
+                            value:password
+                        }}
+                />
 
-            <FormInput  
-                    label='Confirm Password'
-                    inputOptions={{
-                        required: true,
-                        type:'password',
-                        onChange:handleChange,
-                        name:'confirmPassword', 
-                        value:confirmPassword
-                    }}
-            />
+                <FormInput  
+                        label='Confirm Password'
+                        inputOptions={{
+                            required: true,
+                            type:'password',
+                            onChange:handleChange,
+                            name:'confirmPassword', 
+                            value:confirmPassword
+                        }}
+                />
 
-            <button type='submit'>Submit</button>
-        </form>
-    </div>
+                <Button buttonType='inverted' type='submit'>Sign Up</Button>
+            </form>
+        </div>
     )
 }
 
