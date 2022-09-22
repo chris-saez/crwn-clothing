@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import FormInput from "../form-input/form-input.component";
 
@@ -11,6 +11,7 @@ import { updateProfile } from "firebase/auth";
 import './sign-up-form.styles.scss';
 
 import Button from '../button/button.component';
+
 
 const defaultFormField = {
     displayName: '',
@@ -30,7 +31,7 @@ const SignUpForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if(!(password === confirmPassword)) {
+        if(password != confirmPassword) {
             alert('Passwords do not match!');
             return;
         }
@@ -42,6 +43,7 @@ const SignUpForm = () => {
         });
 
         const userDocRef = await createUserDocumentFromAuth(user);
+
         resetFormField();
         } catch(error) {
             if(error.code == 'auth/email-already-in-use'){

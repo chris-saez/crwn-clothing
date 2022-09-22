@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import Button from '../button/button.component';
 
@@ -21,16 +21,20 @@ const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormField);
     const { email, password } = formFields;
 
+    const resetFormField = () => {
+        setFormFields(defaultFormField);
+    }
+
     const logGoogleUser = async () => {
-        const {user} = await signInWithGooglePopup();
-        const userDocRef = await createUserDocumentFromAuth(user);
+        await signInWithGooglePopup();
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
-            const {user} = await signInAuthUserFromEmailAndPassword(email, password)
+            const {user} = await signInAuthUserFromEmailAndPassword(email, password);
+            resetFormField();
         }   catch(error) {
             if(error.code == 'auth/user-not-found'){
                 alert('User not found')
